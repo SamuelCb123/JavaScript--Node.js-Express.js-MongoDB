@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: #1e2b37;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff;
+}
+
+.form-control {
+    background-color: #ffffff;
+    color: #1e2b37;
+}
+
+.btn-outline-success {
+    color: #1e2b37;
+    border-color: #1e2b37;
+}
