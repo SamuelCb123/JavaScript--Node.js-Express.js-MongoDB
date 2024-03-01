@@ -1,18 +1,22 @@
 <%- include("templates/cabecera", {titulo: "Panel de administracion"}) %>
 
 <div class="container mt-4">
-    <h1 class="mb-4  d-flex justify-content-center">League of legends Champs Collection</h1>
-    
+    <h1 class="mb-4 d-flex justify-content-center">League of legends Champs Collection</h1>
+
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Abrir Modal
     </button>
+
+    <!-- Modal for creating champion -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <!-- Modal Header -->
                 <div class="modal-header">
-                    
+                    <!-- Add your header content here -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <!-- Modal Body -->
                 <div class="modal-body">
                     <div class="container">
                         <h2>Crear campeón </h2>
@@ -33,7 +37,6 @@
                                 <option value="Zaun">Zaun</option>
                                 <option value="Jonia">Jonia</option>
                                 <option value="El vacio">El vacio</option>
-                               
                             </select>
                             <button type="submit" class="btn btn-dark btn-block" id="guardarBtn">Guardar</button>
                         </form>
@@ -49,11 +52,10 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion </th>
-                    <th scope="col">Detalles </th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Detalles</th>
                     <th scope="col">Eliminar</th>
-                    <th scope="col">Actualizar </th>
-
+                    <th scope="col">Actualizar</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,8 +66,11 @@
                             <td><%= leagueoflegends.Nombre %></td>
                             <td><%= leagueoflegends.Descripcion %></td>
                             <td>
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#myModal<%= leagueoflegends._id %>">Detalles</button>
-                                
+                                <!-- Button to open details modal -->
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#myModal<%= leagueoflegends._id %>">Detalles</button>
+
+                                <!-- Details Modal -->
                                 <div class="modal fade" id="myModal<%= leagueoflegends._id %>" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -94,91 +99,83 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                               
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <button class="btn btn-warning btn-sm btn-eliminar" data-id="<%= leagueoflegends._id %>" data-bs-toggle="modal" data-bs-target="#eliminarModal<%= leagueoflegends._id %>">
+                                <!-- Button to open delete confirmation modal -->
+                                <button class="btn btn-warning btn-sm btn-eliminar" data-id="<%= leagueoflegends._id %>"
+                                    data-bs-toggle="modal" data-bs-target="#eliminarModal<%= leagueoflegends._id %>">
                                     Eliminar
                                 </button>
+
+                                <!-- Delete Confirmation Modal -->
+                                <div class="modal fade" id="eliminarModal<%= leagueoflegends._id %>">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="eliminarModalLabel">Confirmar Eliminación</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Estás seguro de que deseas eliminar este campeón?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-danger" id="confirmarEliminar<%= leagueoflegends._id %>">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
-                            
-                   
-                            <div class="modal fade" id="eliminarModal<%= leagueoflegends._id %>" ...>
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="eliminarModalLabel">Confirmar Eliminación</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ¿Estás seguro de que deseas eliminar este campeón?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-danger" id="confirmarEliminar<%= leagueoflegends._id %>">Eliminar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                
-                            
-                           <td>
-                        
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miNuevoModal<%= leagueoflegends._id %>">
-                                Actualizar
-                            </button>
-                            
-                            <div class="modal fade" id="miNuevoModal<%= leagueoflegends._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <td>
+                                <!-- Button to open update modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal<%= leagueoflegends._id %>">
+                                    Open modal
+                                </button>
 
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar Campeón</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="editar" data-id="<%= leagueoflegends._id %>">
-                                                <input type="number" value="<%= leagueoflegends.id %>" class="form-control my-2" name="id" id="idInput" placeholder="ID">
-                                                <input type="text" value="<%= leagueoflegends.Nombre %>" class="form-control my-2" name="nombre" id="nombreInput" placeholder="Nombre">
-                                                <input type="text" value="<%= leagueoflegends.Descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput" placeholder="Descripción">
-                                                <input type="text" value="<%= leagueoflegends.Curiosidad %>" class="form-control my-2" name="curiosidad" id="curiosidadInput" placeholder="Curiosidad">
-                                                <select class="form-control my-2" id="regionSelect" name="region">
-                                                    <option value="AguasTurbias">Aguas Turbias</option>
-                                                    <option value="Ciudad de Bandle">Ciudad de Bandle</option>
-                                                    <option value="Demacia">Demacia</option>
-                                                    <option value="Noxus">Noxus</option>
-                                                    <option value="Freljord">Freljord</option>
-                                                    <option value="Shurima">Shurima</option>
-                                                    <option value="Islas de la sombra">Islas de la sombra</option>
-                                                    <option value="Piltover">Piltover</option>
-                                                    <option value="Zaun">Zaun</option>
-                                                    <option value="Jonia">Jonia</option>
-                                                    <option value="El vacío">El vacío</option>
-                                                   
-                                                </select>
-                                                <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <!-- Update Modal -->
+                                <div class="modal" id="updateModal<%= leagueoflegends._id %>">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar Campeón</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="editar<%= leagueoflegends._id %>" data-id="<%= leagueoflegends._id %>">
+                                                    <input type="number" value="<%= leagueoflegends.id %>" class="form-control my-2" name="id" id="idInput" placeholder="ID">
+                                                    <input type="text" value="<%= leagueoflegends.Nombre %>" class="form-control my-2" name="nombre" id="nombreInput" placeholder="Nombre">
+                                                    <input type="text" value="<%= leagueoflegends.Descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput" placeholder="Descripción">
+                                                    <input type="text" value="<%= leagueoflegends.Curiosidad %>" class="form-control my-2" name="curiosidad" id="curiosidadInput" placeholder="Curiosidad">
+                                                    <select class="form-control my-2" id="regionSelect" name="region">
+                                                        <option value="AguasTurbias">Aguas Turbias</option>
+                                                        <option value="Ciudad de Bandle">Ciudad de Bandle</option>
+                                                        <option value="Demacia">Demacia</option>
+                                                        <option value="Noxus">Noxus</option>
+                                                        <option value="Freljord">Freljord</option>
+                                                        <option value="Shurima">Shurima</option>
+                                                        <option value="Islas de la sombra">Islas de la sombra</option>
+                                                        <option value="Piltover">Piltover</option>
+                                                        <option value="Zaun">Zaun</option>
+                                                        <option value="Jonia">Jonia</option>
+                                                        <option value="El vacío">El vacío</option>
+                                                    </select>
+                                                    <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            
-
+                            </td>
                         </tr>
-                        
                     <% }); %>
                 <% } else { %>
                     <tr>
-                        <td colspan="4">No hay personajes disponibles.</td>
+                        <td colspan="6">No hay personajes disponibles.</td>
                     </tr>
                 <% } %>
             </tbody>
@@ -187,6 +184,7 @@
 </div>
 
 <%- include("templates/footer") %>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('champions');
@@ -244,43 +242,42 @@
         });
     });
 
-    const formEditar = document.querySelector('#editar');
-    formEditar.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    const formsEditar = document.querySelectorAll('[id^=editar]');
+    formsEditar.forEach(formEditar => {
+        formEditar.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        const id = formEditar.elements['id'].value;
-        const nombre = formEditar.elements['nombreInput'].value;
-        const descripcion = formEditar.elements['descripcionInput'].value;
-        const curiosidad = formEditar.elements['curiosidadInput'].value;
-        const region = formEditar.elements['regionSelect'].value;
-        const _id = formEditar.dataset.id;
+            const id = formEditar.elements['id'].value;
+            const nombre = formEditar.elements['nombreInput'].value;
+            const descripcion = formEditar.elements['descripcionInput'].value;
+            const curiosidad = formEditar.elements['curiosidadInput'].value;
+            const region = formEditar.elements['regionSelect'].value;
+            const _id = formEditar.dataset.id;
 
-        try {
-            const data = await fetch(`/leagueoflegends/${_id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id, Nombre: nombre, Descripcion: descripcion, Curiosidad: curiosidad, Region: region }),
-            });
+            try {
+                const data = await fetch(`/leagueoflegends/${_id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id, Nombre: nombre, Descripcion: descripcion, Curiosidad: curiosidad, Region: region }),
+                });
 
-            if (data.ok) {
-                const res = await data.json();
+                if (data.ok) {
+                    const res = await data.json();
 
-                if (res.estado) {
-                    window.location.href = '/leagueoflegends';
+                    if (res.estado) {
+                        window.location.href = '/leagueoflegends';
+                    } else {
+                        console.log(res);
+                    }
                 } else {
-                    console.log(res);
+                    console.error('Error:', data.status);
                 }
-            } else {
-                console.error('Error:', data.status);
+            } catch (error) {
+                console.error('Error al procesar la respuesta JSON:', error);
             }
-        } catch (error) {
-            console.error('Error al procesar la respuesta JSON:', error);
-        }
+        });
     });
 });
-
-
-    </script>
-    
+</script>
