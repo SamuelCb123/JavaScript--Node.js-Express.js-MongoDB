@@ -128,11 +128,12 @@
                             
                            <td>
                         
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miNuevoModal">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miNuevoModal<%= leagueoflegends._id %>">
                                 Actualizar
                             </button>
                             
-                            <div class="modal fade" id="miNuevoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="miNuevoModal<%= leagueoflegends._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -188,98 +189,96 @@
 <%- include("templates/footer") %>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('champions');
-        const idInput = document.getElementById('id');
-    
-        form.addEventListener('submit', function (event) {
-            const alertDiv = document.getElementById('alertDiv');
-    
-            if (parseInt(idInput.value) < 0) {
-            
-                if (!alertDiv) {
-                    const alertDiv = document.createElement('div');
-                    alertDiv.id = 'alertDiv';
-                    alertDiv.classList.add('alert', 'alert-danger');
-                    alertDiv.innerHTML = '<strong>Error:</strong> El ID no puede ser negativo';
-    
-                    form.parentNode.insertBefore(alertDiv, form);
-                }
-    
-               
-                event.preventDefault();
-            } else {
-                
-                if (alertDiv) {
-                    alertDiv.remove();
-                }
+    const form = document.getElementById('champions');
+    const idInput = document.getElementById('id');
+
+    form.addEventListener('submit', function (event) {
+        const alertDiv = document.getElementById('alertDiv');
+
+        if (parseInt(idInput.value) < 0) {
+
+            if (!alertDiv) {
+                const alertDiv = document.createElement('div');
+                alertDiv.id = 'alertDiv';
+                alertDiv.classList.add('alert', 'alert-danger');
+                alertDiv.innerHTML = '<strong>Error:</strong> El ID no puede ser negativo';
+
+                form.parentNode.insertBefore(alertDiv, form);
             }
-        });
-    
-        const botonesEliminar = document.querySelectorAll('.btn-eliminar');
-    
-        botonesEliminar.forEach(btnEliminar => {
-            btnEliminar.addEventListener('click', () => {
-                const id = btnEliminar.dataset.id;
-                const confirmarEliminarBtn = document.getElementById(`confirmarEliminar${id}`);
-                const eliminarModal = new bootstrap.Modal(document.getElementById(`eliminarModal${id}`));
-    
-                confirmarEliminarBtn.addEventListener('click', async () => {
-                    try {
-                        const data = await fetch(`/leagueoflegends/${id}`, {
-                            method: 'DELETE'
-                        });
-                        const res = await data.json();
-                        console.log(res);
-                        if (res.estado) {
-                            window.location.href = '/leagueoflegends';
-                        } else {
-                            console.log(res);
-                        }
-                    } catch (error) {
-                        console.log(error);
-                    }
-                });
-    
-                eliminarModal.show();
-            });
-        });
-        const formEditar = document.querySelector('#editar');
-formEditar.addEventListener('submit', async (e) => {
-    e.preventDefault();
 
-    const id = formEditar.elements['idInput'].value;
-    const nombre = formEditar.elements['nombreInput'].value;
-    const descripcion = formEditar.elements['descripcionInput'].value;
-    const curiosidad = formEditar.elements['curiosidadInput'].value;
-    const region = formEditar.elements['regionSelect'].value; 
-    const _id = formEditar.dataset.id;
+            event.preventDefault();
+        } else {
 
-    const data = await fetch(`/leagueoflegends/${_id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, Nombre: nombre, Descripcion: descripcion, Curiosidad: curiosidad, Region: region }),
+            if (alertDiv) {
+                alertDiv.remove();
+            }
+        }
     });
 
-    try {
-        if (data.ok) {
-            const res = await data.json();
+    const botonesEliminar = document.querySelectorAll('.btn-eliminar');
 
-            if (res.estado) {
-                window.location.href = '/leagueoflegends';
+    botonesEliminar.forEach(btnEliminar => {
+        btnEliminar.addEventListener('click', () => {
+            const id = btnEliminar.dataset.id;
+            const confirmarEliminarBtn = document.getElementById(`confirmarEliminar${id}`);
+            const eliminarModal = new bootstrap.Modal(document.getElementById(`eliminarModal${id}`));
+
+            confirmarEliminarBtn.addEventListener('click', async () => {
+                try {
+                    const data = await fetch(`/leagueoflegends/${id}`, {
+                        method: 'DELETE'
+                    });
+                    const res = await data.json();
+                    console.log(res);
+                    if (res.estado) {
+                        window.location.href = '/leagueoflegends';
+                    } else {
+                        console.log(res);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+
+            eliminarModal.show();
+        });
+    });
+
+    const formEditar = document.querySelector('#editar');
+    formEditar.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const id = formEditar.elements['id'].value;
+        const nombre = formEditar.elements['nombreInput'].value;
+        const descripcion = formEditar.elements['descripcionInput'].value;
+        const curiosidad = formEditar.elements['curiosidadInput'].value;
+        const region = formEditar.elements['regionSelect'].value;
+        const _id = formEditar.dataset.id;
+
+        try {
+            const data = await fetch(`/leagueoflegends/${_id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id, Nombre: nombre, Descripcion: descripcion, Curiosidad: curiosidad, Region: region }),
+            });
+
+            if (data.ok) {
+                const res = await data.json();
+
+                if (res.estado) {
+                    window.location.href = '/leagueoflegends';
+                } else {
+                    console.log(res);
+                }
             } else {
-                console.log(res);
+                console.error('Error:', data.status);
             }
-        } else {
-            console.error('Error:', data.status);
+        } catch (error) {
+            console.error('Error al procesar la respuesta JSON:', error);
         }
-    } catch (error) {
-        console.error('Error al procesar la respuesta JSON:', error);
-    }
-});
-
-
+    });
 });
 
 
