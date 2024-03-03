@@ -82,7 +82,7 @@ router.put('/:id', async (req, res) => {
     console.log(id)
     console.log('body', body)
     
-    // Filtrar solo los campos permitidos para la actualización
+
     const camposActualizables = {
         Nombre: body.Nombre,
         Descripcion: body.Descripcion,

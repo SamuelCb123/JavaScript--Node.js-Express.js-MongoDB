@@ -3,20 +3,22 @@
 <div class="container mt-4">
     <h1 class="mb-4 d-flex justify-content-center">League of legends Champs Collection</h1>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Abrir Modal
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa-solid fa-plus"></i> Crear campeón
     </button>
+    
+    
 
-    <!-- Modal for creating champion -->
+ 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Modal Header -->
+        
                 <div class="modal-header">
-                    <!-- Add your header content here -->
+             
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <!-- Modal Body -->
+             
                 <div class="modal-body">
                     <div class="container">
                         <h2>Crear campeón </h2>
@@ -66,11 +68,13 @@
                             <td><%= leagueoflegends.Nombre %></td>
                             <td><%= leagueoflegends.Descripcion %></td>
                             <td>
-                                <!-- Button to open details modal -->
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#myModal<%= leagueoflegends._id %>">Detalles</button>
+                                
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#myModal<%= leagueoflegends._id %>">
+                                    <i class="fa-solid fa-circle-info"></i> Detalles
+                                </button>
+                                
 
-                                <!-- Details Modal -->
+                              
                                 <div class="modal fade" id="myModal<%= leagueoflegends._id %>" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -105,13 +109,14 @@
                                 </div>
                             </td>
                             <td>
-                                <!-- Button to open delete confirmation modal -->
-                                <button class="btn btn-warning btn-sm btn-eliminar" data-id="<%= leagueoflegends._id %>"
+                               
+                                <button class="btn btn-danger btn-sm btn-eliminar" data-id="<%= leagueoflegends._id %>"
                                     data-bs-toggle="modal" data-bs-target="#eliminarModal<%= leagueoflegends._id %>">
-                                    Eliminar
+                                    <i class="fa-solid fa-trash"></i> Eliminar
                                 </button>
+                                
 
-                                <!-- Delete Confirmation Modal -->
+                            
                                 <div class="modal fade" id="eliminarModal<%= leagueoflegends._id %>">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -124,20 +129,21 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-danger" id="confirmarEliminar<%= leagueoflegends._id %>">Eliminar</button>
+                                                <button type="button" class="btn btn-danger" id="confirmarEliminar<%= leagueoflegends._id %>">
+                                                    <i class="fa-solid fa-trash"></i> Eliminar
+                                                </button>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <!-- Button to open update modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#updateModal<%= leagueoflegends._id %>">
-                                    Open modal
+                         
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal<%= leagueoflegends._id %>">
+                                    <i class="fa-regular fa-pen-to-square"></i> Editar
                                 </button>
-
-                                <!-- Update Modal -->
+                                
                                 <div class="modal" id="updateModal<%= leagueoflegends._id %>">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -147,7 +153,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form id="editar<%= leagueoflegends._id %>" data-id="<%= leagueoflegends._id %>">
-                                                    <input type="number" value="<%= leagueoflegends.id %>" class="form-control my-2" name="id" id="idInput" placeholder="ID">
+                                                    
                                                     <input type="text" value="<%= leagueoflegends.Nombre %>" class="form-control my-2" name="nombre" id="nombreInput" placeholder="Nombre">
                                                     <input type="text" value="<%= leagueoflegends.Descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput" placeholder="Descripción">
                                                     <input type="text" value="<%= leagueoflegends.Curiosidad %>" class="form-control my-2" name="curiosidad" id="curiosidadInput" placeholder="Curiosidad">
@@ -164,7 +170,10 @@
                                                         <option value="Jonia">Jonia</option>
                                                         <option value="El vacío">El vacío</option>
                                                     </select>
-                                                    <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        <i class="fa-regular fa-pen-to-square"></i> Actualizar
+                                                    </button>
+                                                    
                                                 </form>
                                             </div>
                                         </div>
@@ -247,7 +256,7 @@
         formEditar.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const id = formEditar.elements['id'].value;
+           
             const nombre = formEditar.elements['nombreInput'].value;
             const descripcion = formEditar.elements['descripcionInput'].value;
             const curiosidad = formEditar.elements['curiosidadInput'].value;
